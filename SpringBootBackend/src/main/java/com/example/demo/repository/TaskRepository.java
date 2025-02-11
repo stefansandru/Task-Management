@@ -17,4 +17,7 @@ public interface TaskRepository
 
     @Query("SELECT t FROM Task t WHERE t.title = ?1")
     Optional<Task> findTaskByTitle(String taskTitle);
+
+    @Query("SELECT t FROM Task t ORDER BY t.deadline ASC")
+    List<Task> findAllByOrderByDeadlineAsc();
 }

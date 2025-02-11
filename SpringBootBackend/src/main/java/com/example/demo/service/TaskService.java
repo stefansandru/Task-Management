@@ -21,7 +21,7 @@ public class TaskService {
     }
 
     public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+        return taskRepository.findAllByOrderByDeadlineAsc();
     }
 
     public void addTask(Task task) {
@@ -42,25 +42,42 @@ public class TaskService {
     }
 
     @Transactional
-    public void updateTask(Long id, String title, String description, LocalDate deadline) {
+    public void updateTask(Long id,
+                           String title,
+                           String description,
+                           LocalDate deadline) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(
                         "Task with id " + id + " does not exist."
                 ));
-        if (title != null &&
-                !title.isEmpty() &&
-                !title.equals(task.getTitle())) {
-            task.setTitle(title);
-        }
-        if (description != null &&
-                !description.isEmpty() &&
-                !description.equals(task.getDescription())) {
-            task.setDescription(description);
+        boolean isTitleEmpty = (title == null || title.isEmpty());
+        boolean isDescriptionEmpty = (description == null || description.isEmpty());
+        boolean isDeadlineEmpty = (deadline == null);
+
+        if (isTitleEmpty && isDescriptionEmpty && isDeadlineEmpty) {
+            // Toggle completed
+            boolean toggle = !task.isCompleted();
+            task.setCompleted(toggle);
+
+        } else {
+            // Update title, description, deadline
+            if (!isTitleEmpty && !title.equals(task.getTitle())) {
+                task.setTitle(title);
+            }
+            if (!isDescriptionEmpty && !description.equals(task.getDescription())) {
+                task.setDescription(description);
+            }
+            if (!isDeadlineEmpty && !deadline.equals(task.getDeadline())) {
+                task.setDeadline(deadline);
+            }
         }
 
-        if (deadline != null &&
-                !deadline.equals(task.getDeadline())) {
-            task.setDeadline(deadline);
-        }
+    }
+
+    public Task getTaskById(Long id) {
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Task with id " + id + " does not exist."
+                ));
     }
 }

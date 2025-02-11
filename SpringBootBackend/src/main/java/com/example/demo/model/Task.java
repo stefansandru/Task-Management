@@ -20,9 +20,9 @@ public class Task {
             generator = "task_sequence"
     )
     private Long id;
-    private String title;
-    private String description;
-    private LocalDate deadline;
+    private String title; // input
+    private String description; // input
+    private LocalDate deadline; // input
     private boolean completed;
     @Transient
     private Integer daysUntilDeadline;
@@ -89,11 +89,12 @@ public class Task {
     }
 
     public int getDaysUntilDeadline() {
-        return Period.between(deadline, LocalDate.now()).getDays();
+        return (int) java.time.temporal.ChronoUnit.
+                DAYS.between(LocalDate.now(), deadline);
     }
 
-    public void setDaysUntilDeadline(int hoursUntilDeadline) {
-        this.daysUntilDeadline = hoursUntilDeadline;
+    public void setDaysUntilDeadline(int daysUntilDeadline) {
+        this.daysUntilDeadline = daysUntilDeadline;
     }
 
     public boolean isCompleted() {
