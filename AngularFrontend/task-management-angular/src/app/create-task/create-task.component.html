@@ -1,27 +1,34 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <h4> Create a new task only by completing all input fields. </h4>
+      <h4> Create a new task: </h4>
 
-      <form (ngSubmit)="onSubmit()">
-        
+      <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
         <div class="form-group mb-3">
           <label for="title">Title:</label>
-          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="task.title" required>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="task.title" required #titleRef="ngModel">
         </div>
-
+      
         <div class="form-group mb-3">
           <label for="description">Description:</label>
-          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="task.description" required>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="task.description" required #descriptionRef="ngModel">
         </div>
-
+      
         <div class="form-group mb-3">
           <label for="deadline">Deadline:</label>
-          <input type="date" class="form-control" id="deadline" name="deadline" [(ngModel)]="task.deadline" required>
+          <input type="date" class="form-control" id="deadline" name="deadline" [(ngModel)]="task.deadline" required #deadlineRef="ngModel">
         </div>
-
-        <button type="submit" class="btn btn-primary">Add Task</button>
-
+      
+        <div class="d-flex align-items-start text-start">
+          <button type="submit" class="btn btn-primary me-3" [disabled]="taskForm.invalid">Add Task</button>
+          <div *ngIf="successMessage" class="alert alert-success mb-0">
+            {{ successMessage }}
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger mb-0">
+            {{ errorMessage }}
+          </div>
+        </div>
+        
       </form>
     </div>
   </div>

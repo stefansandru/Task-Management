@@ -17,31 +17,31 @@ export class TaskService {
   }
 
   createTask(task: Task): Observable<Task> {
-    return this.httpClient.post<Task>(this.baseUrl, task);
+    return this.httpClient.post<Task>(this.baseUrl, task, { responseType: 'text' as 'json' });
   }
 
 
-updateTask(id: number | null,
-    title?: string, 
-    description?: string, 
-    deadline?: string): Observable<void> {
-    let queryParams = new URLSearchParams();
-    if (title) queryParams.append('title', title);
-    if (description) queryParams.append('description', description);
-    if (deadline) queryParams.append('deadline', deadline);
-  
-    const url = `${this.baseUrl}/${id}?${queryParams.toString()}`;
-  
-    console.log('Request PUT URL:', url);
+  updateTask(id: number | null,
+      title?: string, 
+      description?: string, 
+      deadline?: string): Observable<void> {
+      let queryParams = new URLSearchParams();
+      if (title) queryParams.append('title', title);
+      if (description) queryParams.append('description', description);
+      if (deadline) queryParams.append('deadline', deadline);
     
-    return this.httpClient.put<void>(url, {}); // Emply body
-  }
+      const url = `${this.baseUrl}/${id}?${queryParams.toString()}`;
+    
+      console.log('Request PUT URL:', url);
+      
+      return this.httpClient.put<void>(url, {}); // Emply body
+    }
 
-  deleteTask(id: number | null): Observable<void> {
-    return this.httpClient.delete<void>(`${this.baseUrl}/${id}`);
-  }
+    deleteTask(id: number | null): Observable<void> {
+      return this.httpClient.delete<void>(`${this.baseUrl}/${id}`);
+    }
 
-  toggleTaskCompletion(id: number | null) {
-    return this.httpClient.patch<void>(`${this.baseUrl}/${id}/toggle-completion`, {});
+    toggleTaskCompletion(id: number | null) {
+      return this.httpClient.patch<void>(`${this.baseUrl}/${id}/toggle-completion`, {});
+    }
   }
-}

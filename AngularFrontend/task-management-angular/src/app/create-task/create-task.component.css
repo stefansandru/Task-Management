@@ -1,0 +1,6 @@
+.alert {
+    display: flex;
+    align-items: center;
+    height: 38px; /* Adjust this value to match the button height */
+    margin-bottom: 0;
+  }
