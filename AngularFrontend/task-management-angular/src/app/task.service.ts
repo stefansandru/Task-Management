@@ -20,6 +20,9 @@ export class TaskService {
     return this.httpClient.post<Task>(this.baseUrl, task, { responseType: 'text' as 'json' });
   }
 
+  getTask(id: number): Observable<Task> {
+    return this.httpClient.get<Task>(`${this.baseUrl}/${id}`);
+  }
 
   updateTask(id: number | null,
       title?: string, 
@@ -31,9 +34,7 @@ export class TaskService {
       if (deadline) queryParams.append('deadline', deadline);
     
       const url = `${this.baseUrl}/${id}?${queryParams.toString()}`;
-    
-      console.log('Request PUT URL:', url);
-      
+          
       return this.httpClient.put<void>(url, {}); // Emply body
     }
 

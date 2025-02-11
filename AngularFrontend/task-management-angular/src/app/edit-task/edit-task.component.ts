@@ -27,12 +27,24 @@ export class EditTaskComponent implements OnInit {
     private router: Router
   ) {}
 
+  // ngOnInit(): void {
+  //   this.taskId = Number(this.route.snapshot.paramMap.get('taskId'));  
+  //   if (this.taskId <= 0) {
+  //     console.error('Invalid task ID: ' + this.taskId);
+  //     return;
+  //   }  
+  // }
+
   ngOnInit(): void {
-    this.taskId = Number(this.route.snapshot.paramMap.get('taskId'));  
-    if (this.taskId <= 0) {
+    this.taskId = Number(this.route.snapshot.paramMap.get('taskId'));
+    if (this.taskId > 0) {
+      this.taskService.getTask(this.taskId).subscribe({
+        next: (task) => this.task = task,
+        error: (err) => console.error('Error fetching task:', err)
+      });
+    } else {
       console.error('Invalid task ID: ' + this.taskId);
-      return;
-    }  
+    }
   }
 
   onSubmit(): void {

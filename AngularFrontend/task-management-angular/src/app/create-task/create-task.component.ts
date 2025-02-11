@@ -25,29 +25,6 @@ export class CreateTaskComponent implements OnInit {
 
   errorMessage: string = '';
   successMessage: string = '';
-  
-  // saveTask() {
-  //   this.taskService.createTask(this.task).subscribe(
-  //     response => {
-  //       this.successMessage = 'Task added successfully!';
-  //       this.errorMessage = '';
-  //       this.task = new Task(null, '', '', '', 0, false);
-  
-  //       // Set a timeout to clear the success message after 5 seconds
-  //       setTimeout(() => {
-  //         this.successMessage = '';
-  //       }, 4000);
-  //     },
-  //     error => {
-  //       if (error.status === 409) {
-  //         this.errorMessage = 'Task already exists!';
-  //       } else {
-  //         this.errorMessage = 'An error occurred while creating the task.';
-  //       }
-  //       this.successMessage = '';
-  //     }
-  //   );
-  // }
 
   saveTask() {
     this.taskService.createTask(this.task).subscribe({

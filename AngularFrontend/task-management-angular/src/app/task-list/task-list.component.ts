@@ -40,7 +40,6 @@ export class TaskListComponent implements OnInit {
   }
 
   public toggleTaskCompletion(id: number | null) {
-    console.log('Toggling task completion:', id);
     this.taskService.updateTask(id).subscribe({
       next: () => this.getTasks(),
       error: (err) => console.error('Error toggling task completion:', err)
