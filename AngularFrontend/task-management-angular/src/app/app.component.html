@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <ul class="navbar-nav">
+    <a [routerLink]="'/tasks'" routerLinkActive="active" class="nav-link">See All Tasks</a>
+    <a [routerLink]="'/create-task'" routerLinkActive="active" class="nav-link">Create Task</a>
+  </ul>
+</nav>
+
+<h1 class="title-center mb-4"> {{title}} </h1>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

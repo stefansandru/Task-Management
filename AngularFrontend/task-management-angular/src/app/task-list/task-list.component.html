@@ -1,0 +1,31 @@
+<h3> All Tasks: </h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th class="description-column">Description</th>
+      <th>Deadline</th>
+      <th>Days until deadline</th>
+      <th>Completed</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>
+        <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task.id)">
+      <td>{{ task.title }}</td>
+      <td class="description-column">{{ task.description }}</td>
+      <td>{{ task.deadline | date:'yyyy-MM-dd' }}</td>  <!-- Formatează data -->
+      <td>{{ task.daysUntilDeadline }}</td>
+      <td>{{ task.completed ? 'Yes' : 'No' }}</td> <!-- Afișează Completed ca 'Yes' sau 'No' -->
+      <td>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" (click)="editTask(task.id)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

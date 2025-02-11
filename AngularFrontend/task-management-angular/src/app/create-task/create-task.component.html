@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h4> Create a new task only by completing all input fields. </h4>
+
+      <form (ngSubmit)="onSubmit()">
+        
+        <div class="form-group mb-3">
+          <label for="title">Title:</label>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="task.title" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="description">Description:</label>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="task.description" required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="deadline">Deadline:</label>
+          <input type="date" class="form-control" id="deadline" name="deadline" [(ngModel)]="task.deadline" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Task</button>
+
+      </form>
+    </div>
+  </div>
+</div>
